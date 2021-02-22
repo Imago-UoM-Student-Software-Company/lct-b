@@ -20,16 +20,14 @@
         </v-btn>
       </v-col>
     </v-row>
-
-    <v-row align="start" class="mt-1">
-      <v-img
-        alt="campus"
-        class="shrink mr-2"
-        contain
-        src="@/assets/campus.jpg"
-      />
-    </v-row>
-  </v-card>
+     
+        <v-row align="start" class="mt-1">
+          <div id="google-map">
+            <GoogleMap/>
+          </div>
+        </v-row>
+      
+  </v-card> 
 </template>
 
 <script>

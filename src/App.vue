@@ -30,7 +30,7 @@
       :timeout="-1"
       color="primary darken-1"
       vertical
-    >
+    >     
       An update is available. This will have no effect on your stored data. It
       will, however, keep your LCT in sync with the server.
 
@@ -95,7 +95,7 @@
         </v-col>
       </v-row>
     </v-app-bar>
-  </v-app>
+  </v-app>  
 </template>
 
 <script>
