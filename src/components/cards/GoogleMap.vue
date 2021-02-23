@@ -4,7 +4,7 @@
           :center=center
           :zoom="17"
           map-type-id="roadmap"
-          style="width: 1270px; height: 410px"
+          style="width: 75vw; height: 58vh;"
         >
           <GmapMarker
             :key="index"
@@ -29,11 +29,13 @@ export default {
       markers: [
         {
           position: kilburn,
-          name: "Kilburn Building"
+          name: "Kilburn Building",
+          rooms: [""],          
         },
         {
           position: university,
-          name: "University Place"
+          name: "University Place",
+          rooms: [""]
 
         },
       ],

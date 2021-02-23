@@ -44,8 +44,9 @@
       <v-card v-if="showSpaces" :height="ht">
         <v-card-text>
           Pick a {{ nsp }} public space category:
-          <v-row>
-            <v-col cols="12">
+          <v-row>     
+                       
+            <v-col cols="12">              
               <v-chip-group
                 v-model="selectedCategory"
                 mandatory
@@ -67,7 +68,7 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
-            <v-col cols="12">
+            <v-col cols="2">
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
                 <v-col cols="auto">
@@ -81,9 +82,15 @@
                 </v-col>
               </v-row>
             </v-col>
-          </v-row>
+            <v-col cols="auto">
+              <!-- Google Map -->                                                     
+              <GoogleMap/>                                                 
+              <!-- Google Map -->
+            </v-col>  
+                                                                                             
+          </v-row>                   
         </v-card-text>
-      </v-card>
+      </v-card>               
 
       <!-- Getherings from button click -->
       <v-card v-if="showGatherings" :height="ht">
@@ -243,12 +250,10 @@ export default {
       sheet: false,
       dialog: false,
       favorite: -1,
-      nsp: "Sisters",
+      nsp: "Manchester Campus",
       categoryLabels: [
-        { NAME: "RES", label: "Food and Drink" },
-        { NAME: "RETAIL", label: "Retail" },
-        { NAME: "LODG", label: "Lodging" },
-        { NAME: "ENTER", label: "Entertainment" },
+        { NAME: "BUILDING", label: "University Buildings" },
+        { NAME: "RES", label: "Food and Drink" }              
       ],
       filteredSpaces: [],
       categorySelected: "",

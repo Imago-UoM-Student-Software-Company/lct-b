@@ -21,11 +21,13 @@
       </v-col>
     </v-row>
      
-        <v-row align="start" class="mt-1">
-          <div id="google-map">
-            <GoogleMap/>
-          </div>
-        </v-row>
+    <v-row align="start" class="mt-1">
+       <v-col cols="auto">
+        <!-- Google Map -->                                                     
+          <GoogleMap/>                                                 
+        <!-- Google Map -->
+      </v-col>  
+    </v-row>
       
   </v-card> 
 </template>
