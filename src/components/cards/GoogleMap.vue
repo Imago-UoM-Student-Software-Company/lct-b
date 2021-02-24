@@ -1,53 +1,23 @@
 <template>
-    <div>     
-        <GmapMap
-          :center=center
-          :zoom="17"
-          map-type-id="roadmap"
-          style="width: 75vw; height: 58vh;"
-        >
-          <GmapMarker
-            :key="index"
-            v-for="(m, index) in markers"
-            :position="m.position"
-            :clickable="true"            
-            @click="center = m.position"
-          />
-        </GmapMap>
-    </div>
+  <div class="GoogleMap" style="width: 75vw; height: 58vh;"/>
 </template>
 
 <script>
-
-const kilburn = { lat: 53.467249, lng: -2.234202};
-const university = { lat: 53.46675, lng: -2.23388};
+import gmapsInit from '../../utils/gmaps';
 
 export default {
-  name: "GoogleMap",
-  data() {
-    return {
-      markers: [
-        {
-          position: kilburn,
-          name: "Kilburn Building",
-          rooms: [""],          
-        },
-        {
-          position: university,
-          name: "University Place",
-          rooms: [""]
+  name: 'GoogleMap',
+  async mounted() {
+    try {
+      const google = await gmapsInit();
+      //const geocoder = new google.maps.Geocoder();
+      const map = new google.maps.Map(this.$el);      
 
-        },
-      ],
-      center: kilburn,
+      map.setCenter({ lat: 53.467249, lng: -2.234202});
+           
+    } catch (error) {
+      console.error(error);
     }
   },
-  methods: {    
-    clearMap() {
-      this.markers = []
-    },
-  }
 };
 </script>
-
-<style scoped></style>

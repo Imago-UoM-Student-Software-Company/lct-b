@@ -4,14 +4,12 @@ import "./registerServiceWorker";
 
 import Vue from "vue";
 import App from "./App.vue";
-import GoogleMap from "./components/cards/GoogleMap";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueSocketIO from "vue-socket.io";
 import SocketIO from "socket.io-client";
-import * as VueGoogleMaps from "vue2-google-maps";
-
+import GoogleMap from "./components/cards/GoogleMap";
 
 // careful reads at
 // https://socket.io/docs/v3/client-api/#io-url-options
@@ -75,15 +73,9 @@ Visitor.$fetch().then(() => {
       // options: options,
       autoConnect: false,
     })                 
-  );
+  );  
 
-  Vue.use( VueGoogleMaps, {
-    load: {
-      key: "AIzaSyAWOXz3PT_-im4V-NG3JLQ6AOwiW5aboa0"
-    }
-  });
-  
-  Vue.component('GoogleMap', GoogleMap);
+  Vue.component("GoogleMap", GoogleMap);
 
   // Vue.config.errorHandler = (error) => ErrorService.onError(error);
   Vue.prototype.$showDetails = false;
