@@ -1,4 +1,4 @@
 {
-  "prodUrl": "https://lct-b-server.herokuapp.com",
+  "prodUrl": "https://lct-b-map-server.herokuapp.com",
   "devUrl": "http://localhost:3003/"
 }
