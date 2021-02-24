@@ -1,6 +1,5 @@
 import { devUrl, prodUrl } from "@/config.json";
 import "./registerServiceWorker";
-// import { ErrorService } from './ErrorService.js';
 
 import Vue from "vue";
 import App from "./App.vue";
