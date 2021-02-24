@@ -51,7 +51,7 @@ const dirPath = path.join(__dirname, "../dist");
 console.log(dirPath);
 app.use(serveStatic(dirPath));
 
-httpServer.listen(port, "localhost", () => {
+httpServer.listen(port, hostname, () => {
   console.log(`Server running on http://${hostname}:${port}`);
   console.log(" ");
 });
