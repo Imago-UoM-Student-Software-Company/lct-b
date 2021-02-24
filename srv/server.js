@@ -45,7 +45,7 @@ io.on("connection", (socket) => {
 //#endregion
 
 const port = process.env.PORT || 8080;
-const hostname = port == 8080 ? "localhost" : process.env.hostname;
+const hostname = port == 8080 ? 'localhost': process.env.hostname;
 
 const dirPath = path.join(__dirname, "../dist");
 console.log(dirPath);
