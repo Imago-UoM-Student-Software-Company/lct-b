@@ -45,7 +45,7 @@
         <v-card-text>
           Pick a {{ nsp }} public space category:
           <v-row>     
-                       
+            <!-- Categories -->       
             <v-col cols="12">              
               <v-chip-group
                 v-model="selectedCategory"
@@ -53,6 +53,7 @@
                 color="secondary"
                 dark
               >
+                <!-- Icons -->
                 <v-chip filter>
                   <v-icon>mdi-store</v-icon>
                 </v-chip>
@@ -68,6 +69,7 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
+            <!-- Drop down -->
             <v-col cols="2">
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
@@ -82,10 +84,9 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="auto">
-              <!-- Google Map -->                                                     
-              <GoogleMap/>                                                 
-              <!-- Google Map -->
+            <!-- Google map -->
+            <v-col cols="auto">                                                    
+              <GoogleMap/>
             </v-col>  
                                                                                              
           </v-row>                   
