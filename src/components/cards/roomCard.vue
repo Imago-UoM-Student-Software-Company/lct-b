@@ -169,6 +169,7 @@
 import visitorIdentityCard from "@/components/cards/visitorIdentityCard";
 import logsCard from "@/components/cards/logsCard";
 import mapCard from "@/components/cards/mapCard";
+import GoogleMap from "@/components/cards/GoogleMap";
 
 import Room from "@/models/Room";
 
@@ -189,6 +190,7 @@ export default {
   },
   components: {
     // warnRoomCard,
+    GoogleMap,
     mapCard,
     visitorIdentityCard,
     logsCard,
@@ -268,6 +270,7 @@ export default {
       this.sheet = !this.sheet;
       this.selectedSpace = "";
     },
+  
 
     customFilter(item, queryText) {
       const textOne = item.room.toLowerCase();
@@ -313,7 +316,7 @@ export default {
       this.categorySelected = this.categories[this.selectedCategory];
       this.filteredSpaces = this.spaces.filter(
         (v) => v.category == this.categorySelected
-      );
+      );  
       this.selectedSpace = "";
 
       this.spaceLabel = `Select a space for ${
@@ -323,7 +326,7 @@ export default {
   },
   async mounted() {
     await Room.$fetch();
-    this.panelState = [0]; // open only the 0th element of expansion-panels
+    this.panelState = [0]; // open only the 0th element of expansion-panels    
   },
 };
 </script>
