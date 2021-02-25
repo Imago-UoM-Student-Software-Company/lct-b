@@ -1,5 +1,5 @@
 <template>
-  <div class="GoogleMap" style="width: 75vw; height: 58vh;"/>
+  <div class='GoogleMap' style="width: 75vw; height: 58vh;"/>
 </template>
 
 <script>
@@ -14,6 +14,7 @@ export default {
       const map = new google.maps.Map(this.$el);      
 
       map.setCenter({ lat: 53.467249, lng: -2.234202});
+      map.setZoom(17);
            
     } catch (error) {
       console.error(error);
