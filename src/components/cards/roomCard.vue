@@ -177,6 +177,7 @@ import Room from "@/models/Room";
 import { data } from "@/assets/data/sistersBusiness.json";
 
 export default {
+  name: 'roomCard',
   props: {
     messages: { type: Array },
     nickName: {
@@ -272,7 +273,6 @@ export default {
       this.selectedSpace = "";
     },
   
-
     customFilter(item, queryText) {
       const textOne = item.room.toLowerCase();
       const searchText = queryText.toLowerCase();
@@ -288,6 +288,7 @@ export default {
         });
       });
     },
+
     save() {
       this.alert = true;
     },
@@ -306,6 +307,10 @@ export default {
         this.hasSaved = true;
       });
     },
+
+    updateDDL(marker){
+      console.log(marker);
+    }
   },
 
   watch: {

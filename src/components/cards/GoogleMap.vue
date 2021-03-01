@@ -4,6 +4,8 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
+import roomCard from './roomCard';
+//import roomCard from "@/components/cards/roomCard";
 
 const locations = [
    {
@@ -30,7 +32,9 @@ export default {
 
       const markerClickHandler = (marker) => {
         map.setZoom(18);
-        map.setCenter(marker.getPosition());                    
+        map.setCenter(marker.getPosition());
+        console.log(marker.name);
+        this.sendMarker(marker.name);                 
       };
 
       const markers = locations.map((location) => {
@@ -42,7 +46,16 @@ export default {
     } catch (error) {
       console.error(error);
     }
-  }
+  },
+  methods: {
+    sendMarker(marker) {
+      console.log(marker);
+      roomCard.updateDDL(marker);
+    }
+  },
+ // components: {
+ //   roomCard,
+ // },
   
 };
 </script>
