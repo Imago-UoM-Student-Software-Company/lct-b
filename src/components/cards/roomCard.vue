@@ -18,7 +18,7 @@
 
       <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
         You have entered
-        {{ selectedSpace }}
+        {{ selectedSpace.text }}
       </v-snackbar>
 
       <mapCard v-if="showMap" />
@@ -45,7 +45,7 @@
         <v-card-text>
           Pick a {{ nsp }} public space category:
           <v-row>     
-            <!-- Categories -->       
+                       
             <v-col cols="12">              
               <v-chip-group
                 v-model="selectedCategory"
@@ -53,7 +53,6 @@
                 color="secondary"
                 dark
               >
-                <!-- Icons -->
                 <v-chip filter>
                   <v-icon>mdi-store</v-icon>
                 </v-chip>
@@ -69,24 +68,24 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
-            <!-- Drop down -->
             <v-col cols="2">
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
                 <v-col cols="auto">
                   <v-autocomplete
-                    v-model="selectedSpace"
+                    v-model="selectedSpace.text"
                     :items="filteredSpaces"
-                    :filter="customFilter"
+                    :filter="customFilter"                    
                     item-text="room"
-                    clearable
+                    clearable                    
                   ></v-autocomplete>
                 </v-col>
               </v-row>
             </v-col>
-            <!-- Google map -->
-            <v-col cols="auto">                                                    
-              <GoogleMap/>
+            <v-col cols="auto">
+              <!-- Google Map -->                                                     
+              <GoogleMap v-bind:selectedSpace="selectedSpace"/>                                                 
+              <!-- Google Map -->
             </v-col>  
                                                                                              
           </v-row>                   
@@ -100,7 +99,7 @@
           <v-row>
             <v-col cols="10" md="4">
               <v-text-field
-                v-model="selectedSpace"
+                v-model="selectedSpace.text"
                 hint="Use a name others in the gathering would use"
                 persistent-hint
                 clearable
@@ -126,7 +125,7 @@
             @click="save"
           >
             Log visit:
-            {{ selectedSpace }}
+            {{ selectedSpace.text }}
           </v-btn>
         </template>
         <span>Send your visit to the server</span>
@@ -177,7 +176,6 @@ import Room from "@/models/Room";
 import { data } from "@/assets/data/sistersBusiness.json";
 
 export default {
-  name: 'roomCard',
   props: {
     messages: { type: Array },
     nickName: {
@@ -261,7 +259,9 @@ export default {
       ],
       filteredSpaces: [],
       categorySelected: "",
-      selectedSpace: "",
+      selectedSpace: {
+        text: ""
+      },
       hasSaved: false,
       model: null,
     };
@@ -270,9 +270,10 @@ export default {
   methods: {
     cancel() {
       this.sheet = !this.sheet;
-      this.selectedSpace = "";
+      this.selectedSpace.text = "";
     },
   
+
     customFilter(item, queryText) {
       const textOne = item.room.toLowerCase();
       const searchText = queryText.toLowerCase();
@@ -288,7 +289,6 @@ export default {
         });
       });
     },
-
     save() {
       this.alert = true;
     },
@@ -297,25 +297,21 @@ export default {
       this.alert = false;
       // this is where we send a Cypher query to RedisGraph
       const q = `MERGE (v:visitor{ name: '${this.nickName}'})
- MERGE (s:space{ name: '${this.selectedSpace}' })
+ MERGE (s:space{ name: '${this.selectedSpace.text}' })
  MERGE (v)-[r:visited{visitedOn:'${this.visitedOn}'}]->(s)`;
       this.log(q, "RedisGraph: add visit query");
 
       this.exposeEventPromise("logVisit", q).then((results) => {
         this.log(results, "ACK: logVisit");
-        this.$emit("spaceSelected", { room: this.selectedSpace, id: "" });
+        this.$emit("spaceSelected", { room: this.selectedSpace.text, id: "" });
         this.hasSaved = true;
       });
-    },
-
-    updateDDL(marker){
-      console.log(marker);
-    }
+    },   
   },
 
   watch: {
     favorite() {
-      this.selectedSpace = this.selectedFavorite;
+      this.selectedSpace.text = this.selectedFavorite;
     },
 
     selectedCategory() {
@@ -323,7 +319,7 @@ export default {
       this.filteredSpaces = this.spaces.filter(
         (v) => v.category == this.categorySelected
       );  
-      this.selectedSpace = "";
+      this.selectedSpace.text = "";
 
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label

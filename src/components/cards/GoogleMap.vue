@@ -4,8 +4,6 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
-import roomCard from './roomCard';
-//import roomCard from "@/components/cards/roomCard";
 
 const locations = [
    {
@@ -32,30 +30,42 @@ export default {
 
       const markerClickHandler = (marker) => {
         map.setZoom(18);
-        map.setCenter(marker.getPosition());
-        console.log(marker.name);
-        this.sendMarker(marker.name);                 
+        map.setCenter(marker.getPosition());        
+        this.sendMarker(marker.name);          
       };
+
+      const mapClickHandler = () => {
+        map.setZoom(17);
+        map.setCenter({ lat: 53.467249, lng: -2.234202});
+        this.$props.selectedSpace.text = "";
+      }
 
       const markers = locations.map((location) => {
           const marker = new google.maps.Marker({ ...location, map });
           marker.addListener(`click`, () => markerClickHandler(marker));
           return marker;
       });
+
+      map.addListener(`click`, () => mapClickHandler());
            
     } catch (error) {
       console.error(error);
     }
   },
+
   methods: {
     sendMarker(marker) {
-      console.log(marker);
-      roomCard.updateDDL(marker);
+      console.log(marker);                  
+      this.$props.selectedSpace.text = marker;
     }
   },
- // components: {
- //   roomCard,
- // },
+
+  props: {
+    selectedSpace: {
+      type: Object,
+      required: true
+    }
+  },
   
 };
 </script>
