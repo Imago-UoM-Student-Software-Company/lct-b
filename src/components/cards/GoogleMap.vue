@@ -4,18 +4,7 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
-
-const locations = [
-   {
-     position: {lat: 53.467249, lng: -2.234202},
-     name: "Kilburn Building"              
-   },
-   {
-     position: {lat: 53.46675, lng: -2.23388},
-     name: "University Place"        
-   },
-];
-
+import { locations } from "../../assets/data/campusLocations.json"
 
 export default {
   name: 'GoogleMap',

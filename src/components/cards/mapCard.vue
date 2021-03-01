@@ -24,7 +24,7 @@
     <v-row align="start" class="mt-1">
        <v-col cols="auto">
         <!-- Google Map -->                                                     
-          <GoogleMap/>                                                 
+                                                       
         <!-- Google Map -->
       </v-col>  
     </v-row>
@@ -33,5 +33,7 @@
 </template>
 
 <script>
+import GoogleMap from "@/components/cards/GoogleMap";
+
 export default {};
 </script>
