@@ -5,14 +5,36 @@
       "NAME": "BUILDING",
       "ID": "Kilburn Building",
       "PROPERTY ADDRESS": "Manchester M13 9PL",
-      "CITY LIMIT\r": "INSIDE\r"
+      "CITY LIMIT\r": "INSIDE\r",
+      "position": {
+        "lat": 53.467249,
+        "lng": -2.234202
+      },
+      "rooms": []
     },
     {
       "CODE": 2,
       "NAME": "BUILDING",
       "ID": "University Place",
       "PROPERTY ADDRESS": "Manchester M13 9PL",
-      "CITY LIMIT\r": "INSIDE\r"
+      "CITY LIMIT\r": "INSIDE\r",
+      "position": {
+        "lat": 53.46675,
+        "lng": -2.23388
+      },
+      "rooms": []
+    },
+    {
+      "CODE": 3,
+      "NAME": "RES",
+      "ID": "532 Bar & Kitchen",
+      "PROPERTY ADDRESS": "Manchester M13 9PR",
+      "CITY LIMIT\r": "INSIDE\r",
+      "position": {
+        "lat": 53.465780,
+        "lng": -2.2332527
+      },
+      "rooms": []
     }
 
   ]

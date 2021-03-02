@@ -84,7 +84,9 @@
             </v-col>
             <v-col cols="auto">
               <!-- Google Map -->                                                     
-              <GoogleMap v-bind:selectedSpace="selectedSpace"/>                                                 
+              <GoogleMap v-bind:selectedSpace="selectedSpace"
+                         v-bind:categorySelected="categorySelected"
+                         v-bind:markers="markers"/>                                                 
               <!-- Google Map -->
             </v-col>  
                                                                                              
@@ -186,7 +188,7 @@ export default {
       type: Array,
     },
     log: { type: Function },
-    roomName: { type: String },
+    roomName: { type: String }
   },
   components: {
     // warnRoomCard,
@@ -262,6 +264,7 @@ export default {
       selectedSpace: {
         text: ""
       },
+      markers: [],
       hasSaved: false,
       model: null,
     };
@@ -320,6 +323,15 @@ export default {
         (v) => v.category == this.categorySelected
       );  
       this.selectedSpace.text = "";
+      console.log('Markers from roomCard.vue '+this.markers);
+      this.markers.forEach(marker => {
+        if(marker.NAME == this.categorySelected){
+          marker.setVisible(true);
+        }
+        else{
+          marker.setVisible(false);
+        }
+      });      
 
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label

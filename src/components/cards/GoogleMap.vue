@@ -4,7 +4,7 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
-import { locations } from "../../assets/data/campusLocations.json"
+import { data } from "../../assets/data/sistersBusiness.json"
 
 export default {
   name: 'GoogleMap',
@@ -20,7 +20,7 @@ export default {
       const markerClickHandler = (marker) => {
         map.setZoom(18);
         map.setCenter(marker.getPosition());        
-        this.sendMarker(marker.name);          
+        this.sendMarker(marker.ID);          
       };
 
       const mapClickHandler = () => {
@@ -29,11 +29,16 @@ export default {
         this.$props.selectedSpace.text = "";
       }
 
-      const markers = locations.map((location) => {
-          const marker = new google.maps.Marker({ ...location, map });
-          marker.addListener(`click`, () => markerClickHandler(marker));
-          return marker;
-      });
+      this.$props.markers = data.map((location) => {          
+        console.log(location);
+        const marker = new google.maps.Marker({ ...location, map });
+        marker.addListener(`click`, () => markerClickHandler(marker));
+        if(location.NAME == this.$props.categorySelected)
+          marker.setVisible(true);
+        else
+          marker.setVisible(false);
+        return marker;
+      });          
 
       map.addListener(`click`, () => mapClickHandler());
            
@@ -53,8 +58,16 @@ export default {
     selectedSpace: {
       type: Object,
       required: true
+    },
+    categorySelected: {
+      type: String,
+      required: true
+    },
+    markers:{
+      type: Array,
+      required: true
     }
-  },
+  }
   
 };
 </script>
