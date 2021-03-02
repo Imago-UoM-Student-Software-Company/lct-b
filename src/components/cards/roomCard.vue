@@ -78,8 +78,7 @@
                   <v-autocomplete
                     v-model="selectedSpace.text"
                     :items="filteredSpaces"
-                    :filter="customFilter"
-                    :key="event"          
+                    :filter="customFilter"        
                     item-text="room"
                     clearable                    
                   ></v-autocomplete>
@@ -99,12 +98,10 @@
                 <v-col cols="auto">
                   <!-- Options need to be put here -->
                   <v-autocomplete                    
-                  v-model="selectedSpace.text"
+                  v-model="chosenSpace"
                     :items="filteredSpaces"
-                    :filter="customFilter"
                     :key="event"          
-                    item-text="spaces"
-                    clearable                    
+                    item-text="spaces"             
                   ></v-autocomplete>
                 </v-col>
               </v-row>
