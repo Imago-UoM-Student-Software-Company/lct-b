@@ -4,54 +4,68 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
-import { data } from "../../assets/data/sistersBusiness.json"
+import { data } from "../../assets/data/sistersBusiness.json";
+
 
 export default {
   name: 'GoogleMap',
   async mounted() {
     try {
-      const google = await gmapsInit();
-      //const geocoder = new google.maps.Geocoder();
-      const map = new google.maps.Map(this.$el);      
-
-      map.setCenter({ lat: 53.467249, lng: -2.234202});
-      map.setZoom(17);
-
-      const markerClickHandler = (marker) => {
-        map.setZoom(18);
-        map.setCenter(marker.getPosition());        
-        this.sendMarker(marker.ID);          
-      };
-
-      const mapClickHandler = () => {
-        map.setZoom(17);
+        const google = await gmapsInit();        
+        const map = new google.maps.Map(this.$el);      
         map.setCenter({ lat: 53.467249, lng: -2.234202});
-        this.$props.selectedSpace.text = "";
-      }
+        map.setZoom(17);
 
-      this.$props.markers = data.map((location) => {          
-        console.log(location);
-        const marker = new google.maps.Marker({ ...location, map });
-        marker.addListener(`click`, () => markerClickHandler(marker));
-        if(location.NAME == this.$props.categorySelected)
-          marker.setVisible(true);
-        else
-          marker.setVisible(false);
-        return marker;
-      });          
+        const markerClickHandler = (marker) => {
+          map.setZoom(18);
+          map.setCenter(marker.getPosition());        
+          this.sendMarker(marker.ID);          
+        };
 
-      map.addListener(`click`, () => mapClickHandler());
-           
+        const mapClickHandler = () => {
+          map.setZoom(17);
+          map.setCenter({ lat: 53.467249, lng: -2.234202});
+          this.$props.selectedSpace.text = "";              
+        };
+        
+        const markers = this.createMarkers(data, map, google, markerClickHandler);
+
+        map.addListener(`click`, () => mapClickHandler());
+        this.$root.$on('selected-new-category', () => {  
+          this.updateMarkers(markers);
+        });
+                    
     } catch (error) {
-      console.error(error);
-    }
+        console.error(error);
+      }
   },
 
   methods: {
     sendMarker(marker) {
       console.log(marker);                  
       this.$props.selectedSpace.text = marker;
-    }
+    },
+    createMarkers(data, map, google, markerClickHandler) {      
+      const markers = data.map((location) => {                       
+        const marker = new google.maps.Marker({ ...location, map });
+        marker.addListener(`click`, () => markerClickHandler(marker));
+        if(this.$props.categorySelected == marker.NAME)
+          marker.setVisible(true);
+        else
+          marker.setVisible(false);
+        return marker;
+      });    
+
+      return markers;                        
+    },
+    updateMarkers(markers) {
+      markers.forEach(marker => {
+        if(this.$props.categorySelected == marker.NAME)
+          marker.setVisible(true);
+        else
+          marker.setVisible(false);
+      });
+    }    
   },
 
   props: {
@@ -62,10 +76,12 @@ export default {
     categorySelected: {
       type: String,
       required: true
-    },
-    markers:{
-      type: Array,
-      required: true
+    }   
+  },
+
+  data() {
+    return {
+      markers: []
     }
   }
   

@@ -52,6 +52,7 @@
                 mandatory
                 color="secondary"
                 dark
+                v-on="this.$root.$emit('selected-new-category')"
               >
                 <v-chip filter>
                   <v-icon>mdi-store</v-icon>
@@ -85,8 +86,7 @@
             <v-col cols="auto">
               <!-- Google Map -->                                                     
               <GoogleMap v-bind:selectedSpace="selectedSpace"
-                         v-bind:categorySelected="categorySelected"
-                         v-bind:markers="markers"/>                                                 
+                         v-bind:categorySelected="categorySelected"/>                                                 
               <!-- Google Map -->
             </v-col>  
                                                                                              
@@ -263,8 +263,7 @@ export default {
       categorySelected: "",
       selectedSpace: {
         text: ""
-      },
-      markers: [],
+      },    
       hasSaved: false,
       model: null,
     };
@@ -322,16 +321,7 @@ export default {
       this.filteredSpaces = this.spaces.filter(
         (v) => v.category == this.categorySelected
       );  
-      this.selectedSpace.text = "";
-      console.log('Markers from roomCard.vue '+this.markers);
-      this.markers.forEach(marker => {
-        if(marker.NAME == this.categorySelected){
-          marker.setVisible(true);
-        }
-        else{
-          marker.setVisible(false);
-        }
-      });      
+      this.selectedSpace.text = "";                    
 
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label
