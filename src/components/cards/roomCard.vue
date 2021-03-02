@@ -69,8 +69,9 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
-            <!-- DropDown Select Building -->
+            <!-- Drop down menus -->
             <v-col cols="2">
+              <!-- Select Building -->
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
                 <v-col cols="auto">
@@ -83,7 +84,21 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
+              <!-- Select Space -->
+              <v-row no-gutters>
+                <v-col cols="12"> Choose a space from this building: </v-col>
+                <v-col cols="auto">
+                  <v-autocomplete
+                    v-model="selectedSpace.text"
+                    :items="filteredSpaces"
+                    :filter="customFilter"                    
+                    item-text="room"
+                    clearable                    
+                  ></v-autocomplete>
+                </v-col>
+              </v-row>
             </v-col>
+           
             <!-- Google Map -->
             <v-col cols="auto">                           
               <GoogleMap v-bind:selectedSpace="selectedSpace"
