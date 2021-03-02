@@ -12,18 +12,19 @@ export default {
   async mounted() {
     try {
         const google = await gmapsInit();        
-        const map = new google.maps.Map(this.$el);      
+        const map = new google.maps.Map(this.$el);   
+        const defaultZoom = 16;   
         map.setCenter({ lat: 53.467249, lng: -2.234202});
         map.setZoom(17);
 
         const markerClickHandler = (marker) => {
-          map.setZoom(18);
+          map.setZoom(Math.min(map.getZoom() + 1), defaultZoom + 1);
           map.setCenter(marker.getPosition());        
           this.sendMarker(marker.ID);          
         };
 
         const mapClickHandler = () => {
-          map.setZoom(17);
+          map.setZoom(Math.max(map.getZoom() - 1), defaultZoom - 1);
           map.setCenter({ lat: 53.467249, lng: -2.234202});
           this.$props.selectedSpace.text = "";              
         };
@@ -32,6 +33,7 @@ export default {
 
         map.addListener(`click`, () => mapClickHandler());
         this.$root.$on('selected-new-category', () => {  
+          map.setZoom(Math.max(map.getZoom() - 1, defaultZoom - 1));
           this.updateMarkers(markers);
         });
                     
