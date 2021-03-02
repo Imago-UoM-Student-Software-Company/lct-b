@@ -84,17 +84,20 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
-              <!-- Select Space -->
-              <v-row no-gutters>
+              <!-- Select Space 
+              This will hide the ddl in on refresh,
+              and if the building DDL is cleared by clicking on the map,
+              but not if the buidling DDL is cleared by clicking the 'x' button
+
+              v-if="selectedSpace.text.length
+              
+              Need a way to hide the DDL when the x is clicked too              
+              -->
+              <v-row no-gutters v-if="selectedSpace.text.length">
                 <v-col cols="12"> Choose a space from this building: </v-col>
                 <v-col cols="auto">
-                  <v-autocomplete
-                    v-model="selectedSpace.text"
-                    :items="filteredSpaces"
-                    :filter="customFilter"                    
-                    item-text="room"
-                    clearable                    
-                  ></v-autocomplete>
+                  <!-- Options need to be put here -->
+                  <v-autocomplete></v-autocomplete>
                 </v-col>
               </v-row>
             </v-col>
