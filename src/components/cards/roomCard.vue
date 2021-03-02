@@ -45,7 +45,7 @@
         <v-card-text>
           Pick a {{ nsp }} public space category:
           <v-row>     
-                       
+            <!-- Categories -->
             <v-col cols="12">              
               <v-chip-group
                 v-model="selectedCategory"
@@ -54,13 +54,13 @@
                 dark
                 v-on="this.$root.$emit('selected-new-category')"
               >
+              <!-- Icons -->
                 <v-chip filter>
                   <v-icon>mdi-store</v-icon>
                 </v-chip>
                 <v-chip filter>
                   <v-icon>mdi-silverware</v-icon>
                 </v-chip>
-
                 <v-chip filter>
                   <v-icon>mdi-bed</v-icon>
                 </v-chip>
@@ -69,6 +69,7 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
+            <!-- DropDown Select Building -->
             <v-col cols="2">
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
@@ -83,13 +84,11 @@
                 </v-col>
               </v-row>
             </v-col>
-            <v-col cols="auto">
-              <!-- Google Map -->                                                     
+            <!-- Google Map -->
+            <v-col cols="auto">                           
               <GoogleMap v-bind:selectedSpace="selectedSpace"
                          v-bind:categorySelected="categorySelected"/>                                                 
-              <!-- Google Map -->
-            </v-col>  
-                                                                                             
+            </v-col>                                                                                     
           </v-row>                   
         </v-card-text>
       </v-card>               
