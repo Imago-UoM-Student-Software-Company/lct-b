@@ -78,7 +78,8 @@
                   <v-autocomplete
                     v-model="selectedSpace.text"
                     :items="filteredSpaces"
-                    :filter="customFilter"                    
+                    :filter="customFilter"
+                    :key="event"          
                     item-text="room"
                     clearable                    
                   ></v-autocomplete>
@@ -97,7 +98,14 @@
                 <v-col cols="12"> Choose a space from this building: </v-col>
                 <v-col cols="auto">
                   <!-- Options need to be put here -->
-                  <v-autocomplete></v-autocomplete>
+                  <v-autocomplete                    
+                  v-model="selectedSpace.text"
+                    :items="filteredSpaces"
+                    :filter="customFilter"
+                    :key="event"          
+                    item-text="spaces"
+                    clearable                    
+                  ></v-autocomplete>
                 </v-col>
               </v-row>
             </v-col>
@@ -252,7 +260,7 @@ export default {
 
     spaces() {
       return data.map((v) => {
-        return { room: v.ID, id: v.CODE, category: v.NAME };
+        return { room: v.ID, id: v.CODE, category: v.NAME, spaces: v.rooms };
       });
     },
   },
