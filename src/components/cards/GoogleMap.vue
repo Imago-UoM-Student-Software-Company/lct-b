@@ -13,9 +13,9 @@ export default {
     try {
         const google = await gmapsInit();        
         const map = new google.maps.Map(this.$el);   
-        const defaultZoom = 16;   
+        const defaultZoom = 15;   
         map.setCenter({ lat: 53.467249, lng: -2.234202});
-        map.setZoom(17);
+        map.setZoom(defaultZoom);
 
         const markerClickHandler = (marker) => {
           map.setZoom(Math.min(map.getZoom() + 1), defaultZoom + 1);
