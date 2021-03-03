@@ -69,7 +69,9 @@
                 </v-chip>
               </v-chip-group>
             </v-col>
-            <v-col cols="2">
+            </v-row>
+            <v-row>
+            <v-col xs="auto" lg="2">
               <v-row no-gutters>
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
                 <v-col cols="auto">
@@ -244,7 +246,7 @@ export default {
     return {
       spaceLabel: "",
       show: 0,
-      ht: "500px",
+      ht: "600px",
       value: 0,
       selectedCategory: [],
       usePanels: false,
