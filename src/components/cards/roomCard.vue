@@ -335,7 +335,8 @@ export default {
 
       this.exposeEventPromise("logVisit", q).then((results) => {
         this.log(results, "ACK: logVisit");
-        this.$emit("spaceSelected", { room: this.selectedSpace.text, id: "" });
+        this.$emit("spaceSelected", { room: this.selectedSpace.text + 
+          (this.selectedRoom ? (", " + this.selectedRoom) : ''), id: "" });
         this.hasSaved = true;
       });
     },   

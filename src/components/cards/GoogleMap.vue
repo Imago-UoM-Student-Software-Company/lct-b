@@ -13,7 +13,7 @@ export default {
     try {
         const google = await gmapsInit();        
         const map = new google.maps.Map(this.$el);   
-        const defaultZoom = 15;   
+        const defaultZoom = 16;   
         map.setCenter({ lat: 53.467249, lng: -2.234202});
         map.setZoom(defaultZoom);
 
