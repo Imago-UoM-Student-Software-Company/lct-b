@@ -86,7 +86,7 @@
             </v-col>
 
             <!--Second DDL for rooms inside selected space(building) above-->
-            <v-col xs="auto" lg="2">
+            <v-col xs="auto" lg="2" v-if="selectedSpace.text.length">
               <v-row no-gutters>
                 <v-col cols="12"> {{ buildingLabel }}: </v-col>
                 <v-col cols="auto">
