@@ -76,15 +76,30 @@
                 <v-col cols="12"> {{ categoryLabel }}: </v-col>
                 <v-col cols="auto">
                   <v-autocomplete
-                    v-model="selectedSpace.text"
-                    :items="filteredSpaces"
-                    :filter="customFilter"                    
-                    item-text="room"
+                    v-model="selectedSpace.text"                    
+                    :items="filteredSpaces"                                   
+                    item-text="building"
                     clearable                    
                   ></v-autocomplete>
                 </v-col>
               </v-row>
             </v-col>
+
+            <!--Second DDL for rooms inside selected space(building) above-->
+            <v-col xs="auto" lg="2">
+              <v-row no-gutters>
+                <v-col cols="12"> {{ buildingLabel }}: </v-col>
+                <v-col cols="auto">
+                  <v-autocomplete
+                    v-model="selectedRoom"
+                    :items="filteredRooms"                     
+                    item-text="rooms"                                     
+                    clearable              
+                  ></v-autocomplete>
+                </v-col>
+              </v-row>
+            </v-col>
+
             <v-col cols="auto">
               <!-- Google Map -->                                                     
               <GoogleMap v-bind:selectedSpace="selectedSpace"
@@ -204,6 +219,10 @@ export default {
       const label = this.categoryLabels[this.selectedCategory]?.label;
       return `Select a space from ${label}`;
     },
+    buildingLabel() {
+      const label = this.selectedSpace.text;
+      return `Select a room from ${label}`;
+    },
     showFavorites() {
       return this.show == 0;
     },
@@ -237,9 +256,15 @@ export default {
 
     spaces() {
       return data.map((v) => {
-        return { room: v.ID, id: v.CODE, category: v.NAME };
+        return { building: v.ID, id: v.CODE, category: v.NAME };
       });
     },
+
+    rooms() {
+      return data.map((v) => {
+        return { rooms: v.rooms, building: v.ID};
+      });
+    },        
   },
 
   data() {
@@ -259,9 +284,12 @@ export default {
       nsp: "Manchester Campus",
       categoryLabels: [
         { NAME: "BUILDING", label: "University Buildings" },
-        { NAME: "RES", label: "Food and Drink" }              
+        { NAME: "RES", label: "Food and Drink" },
+        { NAME: "ACCOMMODATION", label: "Accommodation" },
+        { NAME: "ENTERTAINING", label: "Entertaining" }                    
       ],
       filteredSpaces: [],
+      filteredRooms: [],
       categorySelected: "",
       selectedSpace: {
         text: ""
@@ -329,6 +357,22 @@ export default {
         this.categoryLabels[this.selectedCategory].label
       }`;
     },
+
+    selectedSpace: {
+      handler() {
+        this.filteredRooms = this.rooms.filter(
+          (v) => v.building == this.selectedSpace.text
+        );
+      },
+      deep: true
+    }
+
+    /*selectedSpace() {
+      this.filteredRooms = this.rooms.filter(
+          (v) => v.building == this.selectedSpace.text
+      );
+    }*/
+    
   },
   async mounted() {
     await Room.$fetch();
