@@ -1,5 +1,5 @@
 <template>
-  <div class='GoogleMap' style="width: 75vw; height: 360px;"/>
+  <div class='GoogleMap' style="width: 75vw; height: 53vh;"/>
 </template>
 
 <script>

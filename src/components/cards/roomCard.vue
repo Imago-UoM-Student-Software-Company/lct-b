@@ -144,7 +144,7 @@
             @click="save"
           >
             Log visit:
-            {{ selectedSpace.text }}
+            {{ selectedSpace.text + (selectedRoom ? (", " + selectedRoom) : '')}}
           </v-btn>
         </template>
         <span>Send your visit to the server</span>
@@ -362,7 +362,9 @@ export default {
       handler() {
         this.filteredRooms = this.rooms.filter(
           (v) => v.building == this.selectedSpace.text
-        );
+        );   
+        console.log(this.filteredRooms);     
+        this.filteredRooms = this.filteredRooms[0].rooms;
       },
       deep: true
     }
