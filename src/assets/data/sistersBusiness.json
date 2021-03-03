@@ -242,6 +242,7 @@
       },
       {
       "CODE": 25,
+      "NAME": "BUILDING",
       "ID":"Stopford Building",
       "rooms":["Theatre 1","Theatre 2","Theatre 3","Theatre 4","Theatre 5","Theatre 6"],
       "position": {
@@ -319,7 +320,7 @@
         "lat": 53.465780,
         "lng": -2.2332527
       },
-      "rooms": []
+      "rooms": ["Reception", "Main"]
     }
 
   ]
