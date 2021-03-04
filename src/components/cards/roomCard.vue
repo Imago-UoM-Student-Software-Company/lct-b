@@ -18,7 +18,7 @@
 
       <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
         You have entered
-        {{ selectedSpace.text }}
+        {{ selectedSpace.text + (selectedRoom ? (", " + selectedRoom) : '') }}
       </v-snackbar>
 
       <mapCard v-if="showMap" />
@@ -86,7 +86,7 @@
             </v-col>
 
             <!--Second DDL for rooms inside selected space(building) above-->
-            <v-col xs="auto" lg="2" v-if="selectedSpace.text.length">
+            <v-col xs="auto" lg="2" v-if="this.selectedSpace.text">
               <v-row no-gutters>
                 <v-col cols="12"> {{ buildingLabel }}: </v-col>
                 <v-col cols="auto">
@@ -107,7 +107,7 @@
               <!-- Google Map -->
             </v-col>  
                                                                                              
-          </v-row>                   
+          </v-row>         
         </v-card-text>
       </v-card>               
 
@@ -329,7 +329,7 @@ export default {
       this.alert = false;
       // this is where we send a Cypher query to RedisGraph
       const q = `MERGE (v:visitor{ name: '${this.nickName}'})
- MERGE (s:space{ name: '${this.selectedSpace.text}' })
+ MERGE (s:space{ name: '${this.selectedSpace.text + (this.selectedRoom ? (", " + this.selectedRoom) : '')}' })
  MERGE (v)-[r:visited{visitedOn:'${this.visitedOn}'}]->(s)`;
       this.log(q, "RedisGraph: add visit query");
 
