@@ -189,7 +189,7 @@ import GoogleMap from "@/components/cards/GoogleMap";
 
 import Room from "@/models/Room";
 
-import { data } from "@/assets/data/sistersBusiness.json";
+import { data } from "@/assets/data/manchesterBusiness.json";
 
 export default {
   props: {
@@ -354,7 +354,7 @@ export default {
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label
       }`;
-    },
+    },   
 
     selectedSpace: {
       handler() {

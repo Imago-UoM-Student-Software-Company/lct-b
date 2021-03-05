@@ -4,7 +4,7 @@
 
 <script>
 import gmapsInit from '../../utils/gmaps';
-import { data } from "../../assets/data/sistersBusiness.json";
+import { data } from "../../assets/data/manchesterBusiness.json";
 
 
 export default {
