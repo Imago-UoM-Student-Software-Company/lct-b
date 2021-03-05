@@ -51,8 +51,7 @@
                 v-model="selectedCategory"
                 mandatory
                 color="secondary"
-                dark
-                v-on="this.$root.$emit('selected-new-category')"
+                dark                              
               >
                 <v-chip filter>
                   <v-icon>mdi-store</v-icon>
@@ -214,10 +213,12 @@ export default {
   computed: {
     categoryLabel() {
       const label = this.categoryLabels[this.selectedCategory]?.label;
-      return `Select a space from ${label}`;
+      this.$root.$emit('selected-new-category'); 
+      return `Select a space from ${label}`;      
     },
     buildingLabel() {
       const label = this.selectedSpace.text;
+      this.$root.$emit('selected-new-space',this.selectedSpace.text); 
       return `Select a room from ${label}`;
     },
     showFavorites() {
@@ -291,6 +292,7 @@ export default {
       selectedSpace: {
         text: ""
       },    
+      selectedRoom: "",
       hasSaved: false,
       model: null,
     };
@@ -344,7 +346,7 @@ export default {
       this.selectedSpace.text = this.selectedFavorite;
     },
 
-    selectedCategory() {
+    selectedCategory() {      
       this.categorySelected = this.categories[this.selectedCategory];
       this.filteredSpaces = this.spaces.filter(
         (v) => v.category == this.categorySelected
@@ -353,15 +355,15 @@ export default {
 
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label
-      }`;
+      }`;           
+      
     },   
 
     selectedSpace: {
-      handler() {
+      handler() {        
         this.filteredRooms = this.rooms.filter(
           (v) => v.building == this.selectedSpace.text
-        );   
-        console.log(this.filteredRooms);     
+        );              
         this.filteredRooms = this.filteredRooms[0].rooms;
       },
       deep: true

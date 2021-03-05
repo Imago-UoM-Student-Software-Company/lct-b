@@ -32,9 +32,26 @@ export default {
         const markers = this.createMarkers(data, map, google, markerClickHandler);
 
         map.addListener(`click`, () => mapClickHandler());
+
         this.$root.$on('selected-new-category', () => {  
           map.setZoom(Math.max(map.getZoom() - 1, defaultZoom - 1));
           this.updateMarkers(markers);
+        });
+
+        this.$root.$on('selected-new-space', (selectedSpaceName) => {
+          console.log("NEW SPACE SELECTED: " + selectedSpaceName);          
+          markers.forEach(marker => {
+            if(marker.ID == selectedSpaceName){
+              marker.setVisible(true);
+              console.log(marker.NAME);
+              map.setCenter(marker.position);
+              map.setZoom(Math.min(map.getZoom() + 1), defaultZoom + 1);
+            }
+            else
+            {
+              marker.setVisible(false);
+            }            
+          });
         });
                     
     } catch (error) {
