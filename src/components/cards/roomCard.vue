@@ -83,11 +83,8 @@
                   ></v-autocomplete>
                 </v-col>
               </v-row>
-            </v-col>
-
             <!--Second DDL for rooms inside selected space(building) above-->
-            <v-col xs="auto" lg="2" v-if="this.selectedSpace.text">
-              <v-row no-gutters>
+              <v-row no-gutters v-if="this.selectedSpace.text">
                 <v-col cols="12"> {{ buildingLabel }}: </v-col>
                 <v-col cols="auto">
                   <v-autocomplete
