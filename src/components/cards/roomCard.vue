@@ -365,8 +365,9 @@ export default {
           this.filteredRooms = this.rooms.filter(
             (v) => v.building == this.selectedSpace.text
           );              
-          this.filteredRooms = this.filteredRooms[0].rooms;
+          this.filteredRooms = this.filteredRooms[0].rooms;          
         }
+        this.$root.$emit('selected-new-category');
       },
       deep: true
     }
