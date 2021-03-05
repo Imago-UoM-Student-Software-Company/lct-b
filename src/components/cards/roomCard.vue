@@ -360,11 +360,13 @@ export default {
     },   
 
     selectedSpace: {
-      handler() {        
-        this.filteredRooms = this.rooms.filter(
-          (v) => v.building == this.selectedSpace.text
-        );              
-        this.filteredRooms = this.filteredRooms[0].rooms;
+      handler() {
+        if(this.selectedSpace.text) {        
+          this.filteredRooms = this.rooms.filter(
+            (v) => v.building == this.selectedSpace.text
+          );              
+          this.filteredRooms = this.filteredRooms[0].rooms;
+        }
       },
       deep: true
     }
