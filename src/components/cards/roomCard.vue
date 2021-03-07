@@ -78,19 +78,20 @@
                     v-model="selectedSpace.text"                    
                     :items="filteredSpaces"                                   
                     item-text="building"
-                    clearable                    
+                    clearable
+                    
                   ></v-autocomplete>
                 </v-col>
               </v-row>
             <!--Second DDL for rooms inside selected space(building) above-->
-              <v-row no-gutters v-if="this.selectedSpace.text">
+              <v-row no-gutters v-show="this.selectedSpace.text">
                 <v-col cols="12"> {{ buildingLabel }}: </v-col>
                 <v-col cols="auto">
                   <v-autocomplete
                     v-model="selectedRoom"
                     :items="filteredRooms"                     
-                    item-text="rooms"                                     
-                    clearable              
+                    item-text="rooms"                                   
+                    clearable
                   ></v-autocomplete>
                 </v-col>
               </v-row>
@@ -138,9 +139,12 @@
             v-bind="attrs"
             v-on="on"
             @click="save"
+            :disabled="!selectedRoom || !selectedSpace"
           >
-            Log visit:
+          <span class="text-wrap">
+             Log visit:
             {{ selectedSpace.text + (selectedRoom ? (", " + selectedRoom) : '')}}
+          </span>
           </v-btn>
         </template>
         <span>Send your visit to the server</span>
@@ -180,7 +184,7 @@
 </template>
 
 <script>
-// import warnRoomCard from "@/components/cards/warnRoomCard";
+import warnRoomCard from "@/components/cards/warnRoomCard";
 import visitorIdentityCard from "@/components/cards/visitorIdentityCard";
 import logsCard from "@/components/cards/logsCard";
 import mapCard from "@/components/cards/mapCard";
@@ -204,7 +208,7 @@ export default {
     roomName: { type: String }
   },
   components: {
-    // warnRoomCard,
+    warnRoomCard,
     GoogleMap,
     mapCard,
     visitorIdentityCard,
@@ -355,17 +359,20 @@ export default {
 
       this.spaceLabel = `Select a space for ${
         this.categoryLabels[this.selectedCategory].label
-      }`;           
+      }`;
       
     },   
 
     selectedSpace: {
       handler() {
-        if(this.selectedSpace.text) {        
+        if(this.selectedSpace.text) {      
           this.filteredRooms = this.rooms.filter(
             (v) => v.building == this.selectedSpace.text
-          );              
-          this.filteredRooms = this.filteredRooms[0].rooms;          
+          ); 
+          this.filteredRooms = this.filteredRooms[0].rooms;
+          this.selectedRoom = this.filteredRooms[0];
+        }else{
+          this.selectedRoom = null;
         }
         this.$root.$emit('selected-new-category');
       },
