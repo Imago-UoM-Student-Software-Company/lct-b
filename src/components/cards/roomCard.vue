@@ -84,7 +84,7 @@
                 </v-col>
               </v-row>
             <!--Second DDL for rooms inside selected space(building) above-->
-              <v-row no-gutters v-show="this.selectedSpace.text">
+              <v-row no-gutters v-if="this.selectedSpace.text">
                 <v-col cols="12"> {{ buildingLabel }}: </v-col>
                 <v-col cols="auto">
                   <v-autocomplete
@@ -139,7 +139,7 @@
             v-bind="attrs"
             v-on="on"
             @click="save"
-            :disabled="!selectedRoom || !selectedSpace"
+            :disabled="!selectedRoom"
           >
           <span class="text-wrap">
              Log visit:
@@ -184,7 +184,7 @@
 </template>
 
 <script>
-import warnRoomCard from "@/components/cards/warnRoomCard";
+//import warnRoomCard from "@/components/cards/warnRoomCard";
 import visitorIdentityCard from "@/components/cards/visitorIdentityCard";
 import logsCard from "@/components/cards/logsCard";
 import mapCard from "@/components/cards/mapCard";
@@ -208,7 +208,7 @@ export default {
     roomName: { type: String }
   },
   components: {
-    warnRoomCard,
+    //warnRoomCard,
     GoogleMap,
     mapCard,
     visitorIdentityCard,
